@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:music_editor/image_merger.dart';
+import 'package:music_editor/image_picker.dart';
 import 'package:music_editor/utility.dart';
 import 'package:video_player/video_player.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -27,21 +30,43 @@ class _MyVideoScreenState extends State<MyVideoScreen> {
     super.dispose();
   }
 
+
+ 
+
+
  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Video and Audio Merge'),
+        actions: [InkWell(
+          onTap: () {
+            // pickImageFromGallery();
+            Navigator.push(context, MaterialPageRoute(builder: ((context)=> MergeImageAndAudioScreen())));
+            
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.photo_album),
+          ),
+        )],
       ),
       body: Center(
         child: Column(
                 children: [
                   if (showPlayer) ...[
-                    Text('Play video'),
-                    AspectRatio(
-                      aspectRatio: finalVideo.value.aspectRatio,
-                      child: VideoPlayer(finalVideo),
+
+                    // Text('Play video'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 300,
+                        child: AspectRatio(
+                          aspectRatio: finalVideo.value.aspectRatio,
+                          child: VideoPlayer(finalVideo),
+                        ),
+                      ),
                     ),
                   ],
                   // AspectRatio(
@@ -53,9 +78,9 @@ class _MyVideoScreenState extends State<MyVideoScreen> {
                       try {
                         finalVideo = (await Utility().mergeAudioAndVideo(
                             audioUrl:
-                                'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3',
+                                'https://dl.espressif.com/dl/audio/gs-16b-2c-44100hz.mp3',
                             videoUrl:
-                                'https://v3.cdnpk.net/videvo_files/video/free/2012-09/large_watermarked/hd0456_preview.mp4'))!;
+                                'https://v3.cdnpk.net/videvo_files/video/premium/video0226/large_watermarked/03_Khomenko_15_fun_preview.mp4'))!;
                         finalVideo.initialize();
                         showPlayer = true;
                         setState(() {});
