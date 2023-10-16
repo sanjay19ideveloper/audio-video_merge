@@ -63,7 +63,7 @@ class _MyVideoScreenState extends State<MyVideoScreen> {
                         print("some went wrong $e");
                       }
                     },
-                    child: const Text('Merge'),
+                    child: const Text('Merge audio/video'),
                   ),
                 if(showPlayer)  ElevatedButton(
                     onPressed: () async {
