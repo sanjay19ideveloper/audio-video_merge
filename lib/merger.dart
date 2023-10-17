@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:music_editor/image_merger.dart';
-import 'package:music_editor/image_picker.dart';
+
 import 'package:music_editor/utility.dart';
 import 'package:video_player/video_player.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 class MyVideoScreen extends StatefulWidget {
   @override
