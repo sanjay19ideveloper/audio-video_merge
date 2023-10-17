@@ -86,10 +86,11 @@ class _MergeImageAndAudioScreenState extends State<MergeImageAndAudioScreen> {
 
   @override
   void dispose() {
-    finalVideo.dispose();
-    finalVideo.removeListener(_updatePosition);
+    // finalVideo.dispose();
+    // finalVideo.removeListener(_updatePosition);
 
-    _positionStreamController.close();
+    // _positionStreamController.close();
+    
     super.dispose();
   }
 
@@ -146,8 +147,15 @@ class _MergeImageAndAudioScreenState extends State<MergeImageAndAudioScreen> {
               // Text('Play video'),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => MySliderApp())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => MySliderApp(
+                                finalVideo: finalVideo,
+                                // positionStreamController:
+                                //     _positionStreamController,
+                                // showPlayer: true,
+                              ))));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -181,7 +189,6 @@ class _MergeImageAndAudioScreenState extends State<MergeImageAndAudioScreen> {
                       if (snapshot.hasData) {
                         return Row(
                           children: [
-                            
                             Slider(
                               activeColor: Colors.green,
                               value: finalVideo.value.position.inSeconds
@@ -195,46 +202,10 @@ class _MergeImageAndAudioScreenState extends State<MergeImageAndAudioScreen> {
                                 '${finalVideo.value.position.inSeconds}:${finalVideo.value.duration.inSeconds.toInt()}'),
                           ],
                         );
-                        // return Slider(
-                        //   activeColor: Colors.green,
-                        //   value: finalVideo.value.duration.inSeconds.toDouble(),
-                        //   onChanged: _onSliderChanged,
-                        //   min: 0.0,
-                        //   max: finalVideo.value.duration.inSeconds.toDouble(),
-                        // );
                       }
                       return const SizedBox();
-                      // if (snapshot.hasData) {
-                      //   final position = snapshot.data!;
-                      //   final duration = finalVideo.value.duration;
-
-                      //   // Calculate the value for the slider
-                      //   final double sliderValue = duration.inMilliseconds > 0
-                      //       ? position.inMilliseconds /
-                      //           duration.inMilliseconds
-                      //       : 0.0;
-
-                      //   return Slider(
-                      //     activeColor: Colors.green,
-                      //     value: sliderValue,
-                      //     onChanged: _onSliderChanged,
-                      //     min: 0.0,
-                      //     max: 1.0,
-                      //   );
-                      // } else {
-                      //   return Container(); // You can replace this with a loading indicator
-                      // }
                     },
                   )
-
-                  //           Slider(
-                  //             activeColor: Colors.green,
-                  //   value: _sliderValue,
-                  //   onChanged: _onSliderChanged,
-                  //   min: 0.0,
-                  //   max: 100.0,
-                  // ),
-                  // Text(finalVideo.value.isPlaying ? 'pause' : 'play'),
                 ],
               ),
           ],
