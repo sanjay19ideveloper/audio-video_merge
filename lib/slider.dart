@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:music_editor/camera.dart';
+import 'package:music_editor/reels.dart';
 import 'package:video_player/video_player.dart';
 
 class MySliderApp extends StatefulWidget {
@@ -17,6 +20,7 @@ class MySliderAppState extends State<MySliderApp> {
       StreamController<Duration>();
 
   VideoPlayerController? videoPlayer;
+ 
 
   @override
   void initState() {
@@ -65,27 +69,34 @@ class MySliderAppState extends State<MySliderApp> {
               subtitle: const Text('use audio'),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                height: 30,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(5.0),
-                  border: Border.all(
+          InkWell(
+            onTap: ()async {
+               await availableCameras().then((value) => Navigator.push(context,
+                MaterialPageRoute(builder: (_) => CameraPage(cameras: value,finalVideo: widget.finalVideo,))));
+              // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CameraPage(cameras:value)));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  height: 30,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
                     color: Colors.blue,
-                    width: 1.0,
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 5.0,
+                    borderRadius: BorderRadius.circular(5.0),
+                    border: Border.all(
+                      color: Colors.blue,
+                      width: 1.0,
                     ),
-                  ],
-                ),
-                child:const Center(child: Text('Use Audio',style: TextStyle(color: Colors.white),))),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                      ),
+                    ],
+                  ),
+                  child:const Center(child: Text('Use Audio',style: TextStyle(color: Colors.white),))),
+            ),
           ),
           Container(child:  StreamBuilder<Duration?>(
             stream: positionStreamController.stream,

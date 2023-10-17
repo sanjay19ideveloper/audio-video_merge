@@ -142,7 +142,7 @@ class _MergeImageAndAudioScreenState extends State<MergeImageAndAudioScreen> {
             // },
             // child: Text('Merge Image and Audio'),
 
-            SizedBox(height: 20),
+           const SizedBox(height: 20),
             if (showPlayer) ...[
               // Text('Play video'),
               InkWell(
